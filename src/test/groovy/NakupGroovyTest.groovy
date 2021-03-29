@@ -1,5 +1,6 @@
 package cz.vlastni.eshop
 
+import cz.vlastni.eshop.dataFactory.Creator
 import cz.vlastni.eshop.dataFactory.DopravaTestDataFactory;
 import cz.vlastni.eshop.dataFactory.NakupTestDataFactory;
 import cz.vlastni.eshop.dataFactory.PlatbaTestDataFactory;
@@ -21,26 +22,20 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import([UzivatelTestDataFactory.class, NakupTestDataFactory.class, PlatbaTestDataFactory.class, DopravaTestDataFactory.class])
+@Import([Creator.class])
 class NakupGrovyTests {
 
     @Autowired
-    private NakupRepository nakupRepository;
-/*    @Autowired
-    private DopravaRepository dopravaRepository;
-    @Autowired
-    private NakoupenaPolozkaRepository nakoupenaPolozkaRepository;
-    @Autowired
-    private PlatbaRepository platbaRepository;
-    @Autowired
-    private UzivatelRepository uzivatelRepository;*/
+    private Creator creator;
 
-    @Autowired
-    private NakupTestDataFactory nakupTestDataFactory;
+@Autowired
+NakupRepository nakupRepository;
+
 
     @Test
     void saveNakup() {
-        nakupTestDataFactory.nakup1();
+        Nakup novy = new Nakup();
+        creator.save(novy);
         List<Nakup> all = nakupRepository.findAll();
         Assertions.assertTrue(all.size()==1);
     }

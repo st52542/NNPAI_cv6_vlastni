@@ -18,7 +18,7 @@ import java.util.List;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(DopravaTestDataFactory.class)
-class DopravaTests {
+class DopravaGroovyTests {
 
     @Autowired
     private DopravaRepository dopravaRepository;
@@ -48,11 +48,15 @@ class DopravaTests {
 
     @Test
     void findDopravaViaCena() {
+        Doprava testDoprava = new Doprava(cena: 565)
+        dopravaTestDataFactory.saveDoprava(testDoprava);
         dopravaTestDataFactory.saveNewDoprava1();
         dopravaTestDataFactory.saveNewDoprava2();
         dopravaTestDataFactory.saveNewDoprava3();
         Doprava result = dopravaRepository.findByCena(109);
+        def jedenHledany = dopravaRepository.findByCena(565);
         Assertions.assertTrue(result.getCena()==109);
+        Assertions.assertTrue(jedenHledany.popis=="testDoprava");
     }
 
 

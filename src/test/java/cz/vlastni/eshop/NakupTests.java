@@ -1,5 +1,8 @@
 package cz.vlastni.eshop;
 
+import cz.vlastni.eshop.dataFactory.NakupTestDataFactory;
+import cz.vlastni.eshop.dataFactory.PlatbaTestDataFactory;
+import cz.vlastni.eshop.dataFactory.UzivatelTestDataFactory;
 import cz.vlastni.eshop.entity.*;
 import cz.vlastni.eshop.repository.*;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -16,6 +20,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import({UzivatelTestDataFactory.class,NakupTestDataFactory.class, PlatbaTestDataFactory.class,UzivatelTestDataFactory.class})
 class NakupTests {
 
     @Autowired
@@ -29,38 +34,17 @@ class NakupTests {
     @Autowired
     private UzivatelRepository uzivatelRepository;
 
+    @Autowired
+    NakupTestDataFactory nakupTestDataFactory;
+
     @Test
     void saveNakup() {
-        Uzivatel user = new Uzivatel();
-        user.setJmeno("abc");
-        user.setPrijmeni("cba");
-        user.setEmail("aa@bbb.cz");
-        user.setHeslo("pass");
-        user.setAdresa("konecna 123");
-        user.setAdmin(true);
-        uzivatelRepository.save(user);
-        Platba pay = new Platba();
-        pay.setPrevod(5.0);
-        platbaRepository.save(pay);
-        NakoupenaPolozka nakoupenaPolozka = new NakoupenaPolozka();
-        nakoupenaPolozka.setMnozstvi(5);
-        nakoupenaPolozka.setPlatnost(true);
-        nakoupenaPolozkaRepository.save(nakoupenaPolozka);
-        Doprava deliver = new Doprava();
-        deliver.setCena(500);
-        dopravaRepository.save(deliver);
-        Nakup buy = new Nakup();
-        buy.setDatumVytvoreni(new Date(2021,3,14));
-        buy.setStav(true);
-        buy.setObjednavka(50);
-        buy.setDoprava(deliver);
-        //buy.setNakoupenaPolozka(nakoupenaPolozka);
-        buy.setPlatba(pay);
-        buy.setUzivatel(user);
-        nakupRepository.save(buy);
+        nakupTestDataFactory.nakup1();
         List<Nakup> all = nakupRepository.findAll();
         Assertions.assertTrue(all.size()==1);
     }
+
+
     @Test
     void saveMoreNakup() {
         Uzivatel user = new Uzivatel();

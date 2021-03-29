@@ -1,5 +1,7 @@
 package cz.vlastni.eshop;
 
+//NEAKTUALNI TRIDA BYLA ODEBRANA !!!!!!!!!!!!!!!!
+
 import cz.vlastni.eshop.entity.NakoupenaPolozka;
 import cz.vlastni.eshop.repository.NakoupenaPolozkaRepository;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +17,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class NakoupenaPlozkaTests {
+class NakoupenaPlozkaTestsNONACTUALCLASSREMOVE {
 
     @Autowired
     private NakoupenaPolozkaRepository nakoupenaPolozkaRepository;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"></head>
+<body>
+<h2>Detail uzivatele</h2>
+<div th:replace="fragments/navigation::navbar"></div>
+<section>
+    <h3 type="text">jmeno</h3>
+    <p th:text ="${uzivatel.jmeno}"></p>
+    <h3 type="text">prijmeni</h3>
+    <p th:text ="${uzivatel.prijmeni}"></p>
+    <h3 type="text">heslo</h3>
+    <p th:text ="${uzivatel.heslo}"></p>
+    <h3 type="text">email</h3>
+    <p th:text ="${uzivatel.email}"></p>
+    <h3 type="text">adresa</h3>
+    <p th:text ="${uzivatel.adresa}"></p>
+    <h3 type="text">admin</h3>
+    <p th:text ="${uzivatel.admin}"></p>
+</section>
+<section>
+    <a class="action-but" th:href="@{'/uzivatel-reg-form/' + ${uzivatel.id}}">Uprav uzivatele</a>
+</section>
+</body>
+</html>

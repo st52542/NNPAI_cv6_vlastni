@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"></head>
+<body>
+<h2>Seznam nakupu</h2>
+<div th:replace="fragments/navigation::navbar"></div>
+<section>
+    <div class="item-list" th:each="buy:${nakupList}">
+        <a class="item" th:href="@{/nakup-detail/{id} (id=${buy.id})}" ><h4 th:text="${buy.objednavka}"></h4></a>
+    </div>
+</section>
+<section>
+    <a class="action-but" th:href="@{'checkout'}">Nova objednavka</a>
+</section>
+</body>
+</html>

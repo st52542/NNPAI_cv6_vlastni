@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"></head>
+<body>
+<h2>Seznam doprav</h2>
+<div th:replace="fragments/navigation::navbar"></div>
+<section>
+    <div class="item-list" th:each="pay:${platbaList}">
+        <a class="item" th:href="@{/platba-detail/{id} (id=${pay.id})}" ><h4 th:text="${pay.popis}"></h4></a>
+    </div>
+</section>
+<section>
+    <a class="action-but" th:href="@{'/platba-reg-form'}">Zaloz novou platbu</a>
+</section>
+</body>
+</html>

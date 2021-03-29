@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"></head>
+<body>
+<h2>Seznam uzivatelu</h2>
+<div th:replace="fragments/navigation::navbar"></div>
+<section>
+    <form action="#" th:action="@{/uloz-dopravu}" th:object="${doprava}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label type="text">popis</label>
+        <input type="text" th:field="*{popis}" />
+        <label type="text">cena</label>
+        <input type="text" th:field="*{cena}" />
+        <input type="submit"/>
+    </form>
+</section>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"></head>
+<body>
+<h2>Seznam uzivatelu</h2>
+<div th:replace="fragments/navigation::navbar"></div>
+<section>
+    <form action="#" th:action="@{/uloz-uzivatele}" th:object="${uzivatel}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label type="text">jmeno</label>
+        <input type="text" th:field="*{jmeno}" />
+        <label type="text">prijmeni</label>
+        <input type="text" th:field="*{prijmeni}" />
+        <label type="text">heslo</label>
+        <input type="text" th:field="*{heslo}" />
+        <label type="text">adresa</label>
+        <input type="text" th:field="*{adresa}" />
+        <label type="text">email</label>
+        <input type="text" th:field="*{email}" />
+        <label type="text">admin</label>
+        <input type="text" th:field="*{admin}" />
+        <input type="submit"/>
+    </form>
+</section>
+</body>
+</html>

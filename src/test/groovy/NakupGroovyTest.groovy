@@ -8,16 +8,13 @@ import cz.vlastni.eshop.dataFactory.UzivatelTestDataFactory;
 import cz.vlastni.eshop.entity.*;
 import cz.vlastni.eshop.repository.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Date;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -28,8 +25,8 @@ class NakupGrovyTests {
     @Autowired
     private Creator creator;
 
-@Autowired
-NakupRepository nakupRepository;
+    @Autowired
+    NakupRepository nakupRepository;
 
 
     @Test
@@ -37,46 +34,44 @@ NakupRepository nakupRepository;
         Nakup novy = new Nakup();
         creator.save(novy);
         List<Nakup> all = nakupRepository.findAll();
-        Assertions.assertTrue(all.size()==1);
+        Assertions.assertTrue(all.size() == 1);
     }
 
 
     @Test
     void saveMoreNakup() {
-        nakupTestDataFactory.nakup1();
-        nakupTestDataFactory.nakup2();
+        Nakup novy = new Nakup();
+        creator.save(novy);
+        Nakup novy2 = new Nakup();
+        creator.save(novy2);
         List<Nakup> all = nakupRepository.findAll();
-        Assertions.assertTrue(all.size()==2);
+        Assertions.assertTrue(all.size() == 2);
     }
+
     @Test
     void findNakupViaObjednavka() {
-        nakupTestDataFactory.nakup1();
-        nakupTestDataFactory.nakup2();
+        Nakup novy3 = new Nakup();
+        creator.save(novy3);
+        Nakup novy = new Nakup(objednavka: 100);
+        creator.save(novy);
+        Nakup novy2 = new Nakup();
+        creator.save(novy2);
         Nakup search = nakupRepository.findByObjednavka(100);
-        Assertions.assertTrue(search.getObjednavka()==100);
+        Assertions.assertTrue(search.getObjednavka() == 100);
     }
+
     @Test
     void removeNakup() {
-        nakupTestDataFactory.nakup1();
-        nakupTestDataFactory.nakup2();
+        Nakup novy3 = new Nakup();
+        creator.save(novy3);
+        Nakup novy = new Nakup(objednavka: 25);
+        creator.save(novy);
+        Nakup novy2 = new Nakup();
+        creator.save(novy2);
         Nakup removed = nakupRepository.findByObjednavka(25);
         nakupRepository.removeNakupById(removed.getId());
         List<Nakup> all = nakupRepository.findAll();
-        Assertions.assertTrue(all.size()==2);
-    }
-    @Test
-    void findUzivatelViaObjednavka() {
-        nakupTestDataFactory.nakup1();
-        nakupTestDataFactory.nakup2();
-        Nakup search = nakupRepository.findByObjednavka(100);
-        Assertions.assertTrue(search.getUzivatel().getEmail()=="vv@bbb.cz");
-    }
-    @Test
-    void findPlatbaViaObjednavka() {
-        nakupTestDataFactory.nakup1();
-        nakupTestDataFactory.nakup2();
-        Nakup search = nakupRepository.findByObjednavka(100);
-        Assertions.assertTrue(search.getPlatba().getPrevod()==10.5);
+        Assertions.assertTrue(all.size() == 2);
     }
 
 }

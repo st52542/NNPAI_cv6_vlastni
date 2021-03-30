@@ -65,7 +65,7 @@ public class Creator {
                     if (propValue == null && !id) {
                         Class<?> fieldClass = field.getType();
                         if (fieldClass.isAssignableFrom(String.class)) {
-                            propValue = "Test " + field.getName();
+                            propValue = "Test " + field.getName() + Double.toString(Math.random());
                         } else {
                             if (Date.class.equals(fieldClass)) {
                                 propValue = new Date(System.currentTimeMillis());
@@ -73,7 +73,14 @@ public class Creator {
                                 propValue = 1L;
                             }else if (Set.class.equals(fieldClass)){
                                 propValue = new HashSet<>();
-                            }else {
+                            }else if (Boolean.class.equals(fieldClass)){
+                                propValue=true;
+                            }else if (Integer.class.equals(fieldClass)){
+                                propValue=1 + (int)(Math.random() * 50000);
+                            }else if (Double.class.equals(fieldClass)){
+                                propValue=Math.random();
+                            }
+                            else {
                                 propValue = fieldClass.newInstance();
                             }
                         }

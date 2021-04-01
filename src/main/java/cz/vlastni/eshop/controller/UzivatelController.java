@@ -64,6 +64,6 @@ public class UzivatelController {
         uziv.setEmail(pridejZmenUzivatelDto.getEmail());
         uziv.setAdmin(pridejZmenUzivatelDto.getAdmin());
         uzivatelRepository.save(uziv);
-        return "redirect:/";
+        return "redirect:/uzivatel";
     }
 }
